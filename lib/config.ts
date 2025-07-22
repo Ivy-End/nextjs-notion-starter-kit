@@ -54,6 +54,7 @@ export const author: string = getRequiredSiteConfig('author')
 export const domain: string = getRequiredSiteConfig('domain')
 export const description: string = getSiteConfig('description', 'Notion Blog')
 export const language: string = getSiteConfig('language', 'en')
+export const since: string = getSiteConfig('since')
 
 // social accounts
 export const twitter: string | undefined = getSiteConfig('twitter')

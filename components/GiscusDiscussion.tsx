@@ -1,19 +1,25 @@
 import Giscus from '@giscus/react'
 
 export default function GiscusDiscussion() {
-  return (
-    <Giscus
-      repo="Ivy-End/blog‑discussions"
-      repoId="R_kgDOPQkY3Q"
-      category="General"
-      categoryId="DIC_kwDOPQkY3c4CtQzP"
-      mapping="title"     // pathname / title / url / og:title
-      reactionsEnabled="1"
-      strict="1"
-      inputPosition="top"
-      theme="light"
-      lang="zh-CN"
-      loading="lazy"
-    />
-  )
+    return (
+        <>
+            <div id="comments" className="giscus notion-full-page" />
+            <script
+                src="https://giscus.app/client.js"
+                data-repo="Ivy-End/blog-discussions"
+                data-repo-id="R_kgDOPQnPCA"
+                data-category="General"
+                data-category-id="DIC_kwDOPQnPCM4CtREj"
+                data-mapping="title"
+                data-strict="1"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="light"
+                data-lang="zh-CN"
+                crossOrigin="anonymous"
+                async
+            ></script>
+        </>
+    )
 }

@@ -326,12 +326,11 @@ export function NotionPage({
         mapImageUrl={mapImageUrl}
         searchNotion={config.isSearchEnabled ? searchNotion : undefined}
         pageAside={pageAside}
+        pageFooter={<GiscusDiscussion />}
         footer={footer}
       />
 
       {/* <GitHubShareButton /> */}
-
-      <GiscusDiscussion />
     </>
   )
 }

@@ -12,6 +12,7 @@ export default siteConfig({
     name: 'Next.js Notion Starter Kit',
     domain: 'nextjs-notion-starter-kit.transitivebullsh.it',
     author: 'Travis Fischer',
+    since: '2012',
 
     // open graph metadata (optional)
     description: 'Carpe diem',
