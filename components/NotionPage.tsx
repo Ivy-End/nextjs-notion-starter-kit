@@ -329,6 +329,8 @@ export function NotionPage({
       />
 
       <GitHubShareButton />
+
+      {pageType === 'post' && <GiscusComments />}
     </>
   )
 }
