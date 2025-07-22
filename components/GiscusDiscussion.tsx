@@ -1,7 +1,6 @@
-import { Giscus } from '@giscus/react'
+import Giscus from '@giscus/react'
 
-
-export default function Comments() {
+export default function GiscusDiscussion() {
   return (
     <Giscus
       repo="Ivy-End/blog‑discussions"
