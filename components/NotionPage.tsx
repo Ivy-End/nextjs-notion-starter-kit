@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import { type PageBlock } from 'notion-types';
 import { formatDate, getBlockTitle, getPageProperty } from 'notion-utils';
 import { EmbeddedTweet, TweetNotFound, TweetSkeleton } from 'react-tweet';
+import { NotionRenderer, useNotionContext, type NotionComponents } from 'react-notion-x';
 import { useSearchParam } from 'react-use';
 
 import * as config from '@/lib/config';
