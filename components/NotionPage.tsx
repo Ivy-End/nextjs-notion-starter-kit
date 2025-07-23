@@ -25,7 +25,6 @@ import { NotionPageHeader } from './NotionPageHeader';
 import { Page404 } from './Page404';
 import { PageAside } from './PageAside';
 import { PageHead } from './PageHead';
-import PasswordGate from './PasswordGate';
 import styles from './styles.module.css';
 // import { GitHubShareButton } from './GitHubShareButton';
 
