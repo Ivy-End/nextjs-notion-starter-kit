@@ -314,7 +314,7 @@ export function NotionPage({
   return (
     <>
       <PasswordGate
-        pageId={pageId}
+        pageId={pageId || ''}
         isProtected={isProtected}
         password={pagePassword}
       >
