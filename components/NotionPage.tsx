@@ -25,6 +25,7 @@ import { useDarkMode } from '@/lib/use-dark-mode'
 import { Footer } from './Footer'
 // import { GitHubShareButton } from './GitHubShareButton'
 import GiscusDiscussion from './GiscusDiscussion'
+import PasswordGate from './PasswordGate'
 import { Loading } from './Loading'
 import { NotionPageHeader } from './NotionPageHeader'
 import { Page404 } from './Page404'
@@ -227,6 +228,25 @@ export function NotionPage({
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]!]?.value
 
+  // add password gate if the page is protected
+  const FLAG_COL = '加密'
+  const PW_COL = '密码'
+  let isProtected = false
+  let pagePassword = ''
+
+  if (block?.parent_table === 'collection') {
+    const collection = recordMap?.collection?.[block.parent_id]?.value
+    if (collection) {
+      const schema = collection.schema ?? {}
+      const flagId = Object.entries(schema).find(([, v]) => v.name === FLAG_COL)?.[0]
+      const pwId = Object.entries(schema).find(([, v]) => v.name === PW_COL)?.[0]
+
+      isProtected  = flagId ? !!block.properties?.[flagId]?.[0]?.[0] : false
+      pagePassword = pwId   ? (block.properties?.[pwId]?.[0]?.[0] ?? '') : ''
+    }
+  }
+
+
   // const isRootPage =
   //   parsePageId(block?.id) === parsePageId(site?.rootNotionPageId)
   const isBlogPost =
@@ -289,48 +309,55 @@ export function NotionPage({
     getPageProperty<string>('Description', block, recordMap) ||
     config.description
 
+  // password gate if the page is protected
+
   return (
     <>
-      <PageHead
+      <PasswordGate
         pageId={pageId}
-        site={site}
-        title={title}
-        description={socialDescription}
-        image={socialImage}
-        url={canonicalPageUrl}
-        isBlogPost={isBlogPost}
-      />
+        isProtected={isProtected}
+        password={pagePassword}
+      >
+        <PageHead
+          pageId={pageId}
+          site={site}
+          title={title}
+          description={socialDescription}
+          image={socialImage}
+          url={canonicalPageUrl}
+          isBlogPost={isBlogPost}
+        />
 
-      {isLiteMode && <BodyClassName className='notion-lite' />}
-      {isDarkMode && <BodyClassName className='dark-mode' />}
+        {isLiteMode && <BodyClassName className='notion-lite' />}
+        {isDarkMode && <BodyClassName className='dark-mode' />}
 
-      <NotionRenderer
-        bodyClassName={cs(
-          styles.notion,
-          pageId === site.rootNotionPageId && 'index-page'
-        )}
-        darkMode={isDarkMode}
-        components={components}
-        recordMap={recordMap}
-        rootPageId={site.rootNotionPageId}
-        rootDomain={site.domain}
-        fullPage={!isLiteMode}
-        previewImages={!!recordMap.preview_images}
-        showCollectionViewDropdown={false}
-        showTableOfContents={showTableOfContents}
-        minTableOfContentsItems={minTableOfContentsItems}
-        defaultPageIcon={config.defaultPageIcon}
-        defaultPageCover={config.defaultPageCover}
-        defaultPageCoverPosition={config.defaultPageCoverPosition}
-        mapPageUrl={siteMapPageUrl}
-        mapImageUrl={mapImageUrl}
-        searchNotion={config.isSearchEnabled ? searchNotion : undefined}
-        pageAside={pageAside}
-        pageFooter={<GiscusDiscussion />}
-        footer={footer}
-      />
-
+        <NotionRenderer
+          bodyClassName={cs(
+            styles.notion,
+            pageId === site.rootNotionPageId && 'index-page'
+          )}
+          darkMode={isDarkMode}
+          components={components}
+          recordMap={recordMap}
+          rootPageId={site.rootNotionPageId}
+          rootDomain={site.domain}
+          fullPage={!isLiteMode}
+          previewImages={!!recordMap.preview_images}
+          showCollectionViewDropdown={false}
+          showTableOfContents={showTableOfContents}
+          minTableOfContentsItems={minTableOfContentsItems}
+          defaultPageIcon={config.defaultPageIcon}
+          defaultPageCover={config.defaultPageCover}
+          defaultPageCoverPosition={config.defaultPageCoverPosition}
+          mapPageUrl={siteMapPageUrl}
+          mapImageUrl={mapImageUrl}
+          searchNotion={config.isSearchEnabled ? searchNotion : undefined}
+          pageAside={pageAside}
+          pageFooter={<GiscusDiscussion />}
+          footer={footer}
+        />
       {/* <GitHubShareButton /> */}
+      </PasswordGate>
     </>
   )
 }

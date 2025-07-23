@@ -3,7 +3,7 @@
 export default function GiscusDiscussion() {
     return (
         <>
-            <div id="comments" className="giscus notion-full-page" />
+            <div id="comments" className="giscus" />
             <script
                 src="https://giscus.app/client.js"
                 data-repo="Ivy-End/blog-discussions"
