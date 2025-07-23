@@ -224,42 +224,6 @@ export function NotionPage({
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]!]?.value
 
-  // if not a page, do not show comments
-   const isPostPage = block?.type === 'page' && block?.parent_table === 'collection'
-
-  // add password gate if the page is protected
-  const FLAG_COL = '加密'
-  const PW_COL = '密码'
-  let isProtected = false
-  let pagePassword = ''
-
-  if (block?.parent_table === 'collection') {
-    const collection = recordMap?.collection?.[block.parent_id]?.value
-    if (collection) {
-      const schema = collection.schema ?? {}
-      const flagId = Object.entries(schema).find(([, v]) => v.name === FLAG_COL)?.[0]
-      const pwId = Object.entries(schema).find(([, v]) => v.name === PW_COL)?.[0]
-
-      if (flagId) {
-        const raw = block.properties?.[flagId]?.[0]?.[0] ?? ''
-        isProtected  = /^yes$/i.test(raw.trim())
-      }
-      pagePassword = pwId   ? (block.properties?.[pwId]?.[0]?.[0] ?? '') : ''
-
-      // remove hidden meta properties
-      if (flagId) {
-        delete collection.schema[flagId]
-        if (block?.properties) delete block.properties[flagId]
-      }
-      if (pwId) {
-        delete collection.schema[pwId]
-        if (block?.properties) delete block.properties[pwId]
-      }
-    }
-  }
-
-
-
   // const isRootPage =
   //   parsePageId(block?.id) === parsePageId(site?.rootNotionPageId)
   const isBlogPost =
@@ -324,11 +288,6 @@ export function NotionPage({
 
   return (
     <>
-      <PasswordGate
-        pageId={pageId}
-        isProtected={isProtected}
-        password={pagePassword}
-      >
         <PageHead
           pageId={pageId}
           site={site}
@@ -364,11 +323,10 @@ export function NotionPage({
           mapImageUrl={mapImageUrl}
           searchNotion={config.isSearchEnabled ? searchNotion : undefined}
           pageAside={pageAside}
-          pageFooter={isPostPage && <GiscusDiscussion />}
+          pageFooter={isBlogPost && <GiscusDiscussion />}
           footer={footer}
         />
       {/* <GitHubShareButton /> */}
-      </PasswordGate>
     </>
   )
 }
