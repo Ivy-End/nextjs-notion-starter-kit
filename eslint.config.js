@@ -4,6 +4,10 @@ export default [
   ...config,
   {
     files: ['**/*.ts', '**/*.tsx'],
+    extends: [
+      'next/core-web-vitals',
+      'plugin:@next/next/recommended'
+    ],
     rules: {
       'react/prop-types': 'off',
       'unicorn/no-array-reduce': 'off',
