@@ -13,26 +13,29 @@ export default function PasswordGate({
     password = '',
     children
 }: GateProps) {
-    /* 不受保护 → 直接渲染内容 */
-    if (!isProtected) return children
-
-    /* 受保护但未设置密码 → 永久锁定 */
-    if (!password.trim()) {
-        return (
-        <div style={{ padding: '4rem', textAlign: 'center' }}>
-            <p>该文章已被作者锁定，暂不可访问。</p>
-        </div>
-        )
-    }
-
-    /* 有密码：正常验密流程 */
+    // hooks 必须在组件顶层调用
     const key = `unlocked-${pageId}`
     const [ok, setOk] = useState(false)
 
     useEffect(() => {
-        if (localStorage.getItem(key) === 'true') setOk(true)
-    }, [])
+        if (isProtected && password.trim() && localStorage.getItem(key) === 'true') {
+            setOk(true)
+        }
+    }, [isProtected, password, key])
 
+    // 不受保护 → 直接渲染内容
+    if (!isProtected) return children
+
+    // 受保护但未设置密码 → 永久锁定
+    if (!password.trim()) {
+        return (
+            <div style={{ padding: '4rem', textAlign: 'center' }}>
+                <p>该文章已被作者锁定，暂不可访问。</p>
+            </div>
+        )
+    }
+
+    // 有密码：正常验密流程
     if (ok) return children
 
     return (

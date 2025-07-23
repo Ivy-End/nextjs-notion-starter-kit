@@ -26,6 +26,9 @@ importers:
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
+      eslint-plugin-simple-import-sort:
+        specifier: ^12.1.1
+        version: 12.1.1(eslint@9.28.0)
       expiry-map:
         specifier: ^2.0.0
         version: 2.0.0
@@ -111,6 +114,9 @@ importers:
       eslint:
         specifier: ^9.28.0
         version: 9.28.0
+      eslint-plugin-autofix:
+        specifier: ^2.2.0
+        version: 2.2.0(eslint@9.28.0)
       npm-run-all2:
         specifier: ^8.0.4
         version: 8.0.4
@@ -1078,6 +1084,12 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
 
+  eslint-plugin-autofix@2.2.0:
+    resolution: {integrity: sha512-lu8+0r+utyTroROqXIL+a8sUpICi6za22hIzlpb0+x0tQGRnOjhOKU7v8mC/NS/faDoVsw6xW3vUpc+Mcz5NWA==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      eslint: '>=8'
+
   eslint-plugin-import@2.31.0:
     resolution: {integrity: sha512-ixmkI62Rbc2/w8Vfxyh1jQRTdRTF52VxwRVHl/ykPAmqG+Nb7/kNn+byLP0LxPgI7zWA16Jt82SybJInmMia3A==}
     engines: {node: '>=4'}
@@ -1137,6 +1149,10 @@ packages:
     peerDependencies:
       eslint: '>=9.22.0'
 
+  eslint-rule-composer@0.3.0:
+    resolution: {integrity: sha512-bt+Sh8CtDmn2OajxvNO+BX7Wn4CIWMpTRm3MaiKPCQcnnlm0CS2mhui6QaoeQugs+3Kj2ESKEEGJUdVafwhiCg==}
+    engines: {node: '>=4.0.0'}
+
   eslint-scope@8.3.0:
     resolution: {integrity: sha512-pUNxi75F8MJ/GdeKtVLSbYg4ZI34J6C0C7sbL4YOp2exGwen7ZsuBqKzUhXd0qMQ362yET3z+uPwKeg/0C2XCQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -1162,6 +1178,10 @@ packages:
   espree@10.3.0:
     resolution: {integrity: sha512-0QYC8b24HWY8zjRnDTL6RiHfDbAWn63qb4LMj1Z4b076A4une81+z03Kg7l7mn/48PUTqoLptSXez8oknU8Clg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  espree@9.6.1:
+    resolution: {integrity: sha512-oruZaFkjorTpF32kDSI5/75ViwGeZginGGy2NoOSg3Q9bnwlnmDm4HLnkl0RE3n+njDXR037aY1+x58Z/zFdwQ==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
 
   esquery@1.6.0:
     resolution: {integrity: sha512-ca9pw9fomFcKPvFLXhBKUK90ZvGibiGOvRJNbjljY7s7uq/5YO4BOzcYtJqExdx99rF6aAcnRxHmcUHcz6sQsg==}
@@ -2247,6 +2267,10 @@ packages:
   streamsearch@1.1.0:
     resolution: {integrity: sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==}
     engines: {node: '>=10.0.0'}
+
+  string-similarity@4.0.4:
+    resolution: {integrity: sha512-/q/8Q4Bl4ZKAPjj8WerIBJWALKkaPRfrvhfF8k/B23i4nzrlRj2/go1m90In7nG/3XDSbOo0+pu6RvCTM9RGMQ==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   string.prototype.includes@2.0.1:
     resolution: {integrity: sha512-o7+c9bW6zpAdJHTtujeePODAhkuicdAryFsfVKwA+wGw89wJ4GTY484WTucM9hLtDEOpOvI+aHnzqnC5lHp4Rg==}
@@ -3476,6 +3500,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  eslint-plugin-autofix@2.2.0(eslint@9.28.0):
+    dependencies:
+      eslint: 9.28.0
+      eslint-rule-composer: 0.3.0
+      espree: 9.6.1
+      esutils: 2.0.3
+      string-similarity: 4.0.4
+
   eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.33.1(eslint@9.28.0)(typescript@5.8.3))(eslint@9.28.0):
     dependencies:
       '@rtsao/scc': 1.1.0
@@ -3594,6 +3626,8 @@ snapshots:
       semver: 7.7.2
       strip-indent: 4.0.0
 
+  eslint-rule-composer@0.3.0: {}
+
   eslint-scope@8.3.0:
     dependencies:
       esrecurse: 4.3.0
@@ -3648,6 +3682,12 @@ snapshots:
       acorn: 8.14.1
       acorn-jsx: 5.3.2(acorn@8.14.1)
       eslint-visitor-keys: 4.2.0
+
+  espree@9.6.1:
+    dependencies:
+      acorn: 8.14.1
+      acorn-jsx: 5.3.2(acorn@8.14.1)
+      eslint-visitor-keys: 3.4.3
 
   esquery@1.6.0:
     dependencies:
@@ -4837,6 +4877,8 @@ snapshots:
       internal-slot: 1.1.0
 
   streamsearch@1.1.0: {}
+
+  string-similarity@4.0.4: {}
 
   string.prototype.includes@2.0.1:
     dependencies:
