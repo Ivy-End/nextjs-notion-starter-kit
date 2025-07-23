@@ -224,6 +224,9 @@ export function NotionPage({
   const keys = Object.keys(recordMap?.block || {})
   const block = recordMap?.block?.[keys[0]!]?.value
 
+  // if not a page, do not show comments
+   const isPostPage = block?.type === 'page' && block?.parent_table === 'collection'
+
   // add password gate if the page is protected
   const FLAG_COL = '加密'
   const PW_COL = '密码'
@@ -242,8 +245,19 @@ export function NotionPage({
         isProtected  = /^yes$/i.test(raw.trim())
       }
       pagePassword = pwId   ? (block.properties?.[pwId]?.[0]?.[0] ?? '') : ''
+
+      // remove hidden meta properties
+      if (flagId) {
+        delete collection.schema[flagId]
+        if (block?.properties) delete block.properties[flagId]
+      }
+      if (pwId) {
+        delete collection.schema[pwId]
+        if (block?.properties) delete block.properties[pwId]
+      }
     }
   }
+
 
 
   // const isRootPage =
@@ -308,10 +322,6 @@ export function NotionPage({
     getPageProperty<string>('Description', block, recordMap) ||
     config.description
 
-  // password gate if the page is protected
-
-  const HIDDEN_META = new Set(['加密', '置顶', '密码'])
-
   return (
     <>
       <PasswordGate
@@ -354,7 +364,7 @@ export function NotionPage({
           mapImageUrl={mapImageUrl}
           searchNotion={config.isSearchEnabled ? searchNotion : undefined}
           pageAside={pageAside}
-          pageFooter={<GiscusDiscussion />}
+          pageFooter={isPostPage && <GiscusDiscussion />}
           footer={footer}
         />
       {/* <GitHubShareButton /> */}
