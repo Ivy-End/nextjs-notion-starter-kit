@@ -37,6 +37,7 @@
     "@keyvhq/redis": "^1.6.10",
     "@react-icons/all-files": "^4.1.0",
     "classnames": "^2.5.1",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "expiry-map": "^2.0.0",
     "fathom-client": "^3.4.1",
     "ky": "^1.8.1",
@@ -67,6 +68,7 @@
     "@types/rss": "^0.0.32",
     "cross-env": "^7.0.2",
     "eslint": "^9.28.0",
+    "eslint-plugin-autofix": "^2.2.0",
     "npm-run-all2": "^8.0.4",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3"

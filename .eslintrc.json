@@ -1,7 +1,10 @@
 {
   "root": true,
   "extends": ["@fisch0920/eslint-config"],
+  "plugins": ["simple-import-sort"],
   "rules": {
+    "simpole-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
     "react/prop-types": "off",
     "unicorn/no-array-reduce": "off",
     "unicorn/filename-case": "off",
