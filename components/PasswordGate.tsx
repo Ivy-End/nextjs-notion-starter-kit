@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 interface GateProps {
-    pageId: string
-    isProtected: boolean
+    pageId?: string
+    isProtected?: boolean
     password?: string
-    children: React.ReactNode
+    children?: React.ReactNode
 }
 
 export default function PasswordGate({
