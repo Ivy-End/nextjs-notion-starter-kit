@@ -1,10 +1,11 @@
-// import Giscus from '@giscus/react'
+import Script from 'next/script'
 
 export default function GiscusDiscussion() {
     return (
         <>
             <div id="comments" className="giscus" />
-            <script
+
+            <Script
                 src="https://giscus.app/client.js"
                 data-repo="Ivy-End/blog-discussions"
                 data-repo-id="R_kgDOPQnPCA"
@@ -18,8 +19,9 @@ export default function GiscusDiscussion() {
                 data-theme="light"
                 data-lang="zh-CN"
                 crossOrigin="anonymous"
+                strategy="afterInteractive"
                 async
-            ></script>
+            />
         </>
     )
 }

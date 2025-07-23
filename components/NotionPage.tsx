@@ -237,7 +237,10 @@ export function NotionPage({
       const flagId = Object.entries(schema).find(([, v]) => v.name === FLAG_COL)?.[0]
       const pwId = Object.entries(schema).find(([, v]) => v.name === PW_COL)?.[0]
 
-      isProtected  = flagId ? !!block.properties?.[flagId]?.[0]?.[0] : false
+      if (flagId) {
+        const raw = block.properties?.[flagId]?.[0]?.[0] ?? ''
+        isProtected  = /^yes$/i.test(raw.trim())
+      }
       pagePassword = pwId   ? (block.properties?.[pwId]?.[0]?.[0] ?? '') : ''
     }
   }
@@ -306,6 +309,8 @@ export function NotionPage({
     config.description
 
   // password gate if the page is protected
+
+  const HIDDEN_META = new Set(['加密', '置顶', '密码'])
 
   return (
     <>
