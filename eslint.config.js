@@ -1,13 +1,22 @@
 import { config } from '@fisch0920/config/eslint'
+import nextPlugin from '@next/eslint-plugin-next'
+import eslintConfigNext from 'eslint-config-next'
 
 export default [
   ...config,
   {
     files: ['**/*.ts', '**/*.tsx'],
-    extends: [
-      'next/core-web-vitals',
-      'plugin:@next/next/recommended'
-    ],
+    languageOptions: {
+      parserOptions: {
+        project: './tsconfig.json'
+      }
+    },
+    plugins: {
+      '@next/next': nextPlugin
+    },
+    settings: {
+      ...eslintConfigNext.settings
+    },
     rules: {
       'react/prop-types': 'off',
       'unicorn/no-array-reduce': 'off',
@@ -20,7 +29,8 @@ export default [
       'jsx-a11y/media-has-caption': 'off',
       'jsx-a11y/interactive-supports-focus': 'off',
       'jsx-a11y/anchor-is-valid': 'off',
-      '@typescript-eslint/naming-convention': 'off'
+      '@typescript-eslint/naming-convention': 'off',
+      ...eslintConfigNext.rules
     }
   }
 ]
