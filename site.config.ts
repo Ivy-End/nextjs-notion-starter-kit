@@ -55,6 +55,10 @@ export default siteConfig({
     navigationStyle: 'custom',
     navigationLinks: [
       {
+        title: '归档',
+        pageId: '23ba24ad6cbc80ca831ee2c175929113'
+      },
+      {
         title: '关于',
         pageId: '23aa24ad6cbc80d5bafcc273f23f8169'
       }
